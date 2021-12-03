@@ -1,5 +1,7 @@
 import numpy as np
-with open('data/input3.txt', 'r') as f:
+#source = 'data/input3_test.txt'
+source = 'data/input3.txt'
+with open(source, 'r') as f:
     data = f.readlines()
 
 data = [i.strip('\n') for i in data]
@@ -40,18 +42,17 @@ def filter_vals(mat, bit, cond='ge'):
     keep = np.where(mat[:, bit] == keep_val)
     return mat[keep]
 
-bit = -1
+bit = 0
 while ox.shape[0] > 1:
-    bit += 1
     ox = filter_vals(ox, bit, 'ge')
-ox = ox[0][:bit]
-
-bit = -1
-while co2.shape[0] > 1:
     bit += 1
-    co2 = filter_vals(co2, bit, 'le')
-co2 = co2[0][:bit]
+ox = ox[0]#[:bit]
 
+bit = 0
+while co2.shape[0] > 1:
+    co2 = filter_vals(co2, bit, 'le')
+    bit += 1
+co2 = co2[0]#[:bit]
 
 co2 = to_string(co2)
 ox = to_string(ox)
