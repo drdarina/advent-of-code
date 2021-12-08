@@ -29,7 +29,6 @@ print(f'Gamma {gamma}, epsilon {eps}')
 print(f'integer gamma {int(gamma, 2)}, integer epsilon {int(eps, 2)}, result {int(gamma, 2) * int(eps, 2)}')
 
 # question 2
-# the answer is wrong and I don't have time to keep working on it
 ox = m.T
 co2 = m.T
 
