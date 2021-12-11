@@ -15,6 +15,7 @@ data = np.array(data).astype(int)
 
 
 def update_at_coords(i, j, data):
+    # update the neighboring octopi levels and mark their position if they lit up
     new_shiny = []
     for combination in [(i-1, j-1), (i-1, j), (i-1, j+1), (i, j-1), (i, j+1), (i+1, j-1), (i+1, j), (i+1, j+1)]:
         if combination[0] >= 0 and combination[1] >= 0:
@@ -32,9 +33,12 @@ for cycle in range(100):
     data += 1
     shiny = np.where(data > 9)
     lit_up = []
+    # do the first round of updating
     for i, j in zip(*shiny):
         data, new_shiny = update_at_coords(i, j, data)
         lit_up.extend(new_shiny)
+    # now take all the additional octopi that lit up, update their neighbors and keep doing that until no more are
+    # lighting up
     while len(lit_up) > 0:
         lit_up_copy = lit_up[:]
         lit_up = []
@@ -43,10 +47,12 @@ for cycle in range(100):
             lit_up.extend(new_shiny)
     data[np.where(data >= 10)] = 0
     total_zeros += (data == 0).sum()
-    all_flash = data.sum() == 0
+
 
 print(total_zeros)
 
+
+# for part 2, just run the same code again...
 all_flash = False
 step = 101
 while not all_flash:
