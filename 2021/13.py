@@ -33,18 +33,16 @@ def fold_left(arr, y):
         arr1 = np.hstack([arr1, np.zeros((arr1.shape[0], arr2.shape[1] - arr1.shape[1]))])
     else:
         arr2 = np.hstack([arr2, np.zeros((arr1.shape[0], arr1.shape[1] - arr2.shape[1]))])
-    # reverse second array for "folding"
-    arr2 = arr2[:, ::1]
+    arr2 = arr2[:, ::-1]
     return arr1 + arr2
 
 
-for direction, value in folds[:1]:
-    print(direction, value)
+for direction, value in folds:
     if direction == 'y':
         arr = fold_up(arr, value)
     else:
         arr = fold_left(arr, value)
 
-print(np.sum(np.where(arr > 0, 1, 0)))
-
-print(arr)
+for a in np.array_split(arr, 8, axis=1):
+    print(np.where(a>0, 1, 0))
+    print()
