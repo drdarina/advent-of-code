@@ -20,17 +20,4 @@ for row in data:
     g.add_edge(*row)
 
 
-paths = {}
-node = 'start'
-paths[node] = {}
-
-for edge in g.edges(node):
-    paths[node][]
-    paths[node] = {}
-    edges = g.edges(node)
-    for edge in edges:
-        paths[node][edge[1]] = {}
-
-paths = []
-print(g.edges('start'))
-print(g.edges('A'))
+print(list(nx.all_simple_paths(g, 'start', 'end')))

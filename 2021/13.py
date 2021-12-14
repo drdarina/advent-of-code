@@ -20,7 +20,7 @@ def fold_up(arr, x):
     if arr1.shape[0] < arr2.shape[0]:
         arr1 = np.vstack([np.zeros((arr2.shape[0] - arr1.shape[0], arr1.shape[1])), arr1])
     else:
-        arr2 = np.vstack([np.zeros((arr1.shape[0] - arr2.shape[0], arr1.shape[1])), arr2])
+        arr2 = np.vstack([arr2, np.zeros((arr1.shape[0] - arr2.shape[0], arr1.shape[1]))])
     # reverse second array for "folding"
     arr2 = arr2[::-1, :]
     return arr1 + arr2
@@ -32,9 +32,9 @@ def fold_left(arr, y):
     if arr1.shape[1] < arr2.shape[1]:
         arr1 = np.hstack([arr1, np.zeros((arr1.shape[0], arr2.shape[1] - arr1.shape[1]))])
     else:
-        arr2 = np.hstack([arr2, np.zeros((arr1.shape[0], arr1.shape[1] - arr2.shape[1]))])
+        arr2 = np.hstack([np.zeros((arr1.shape[0], arr1.shape[1] - arr2.shape[1])), arr2])
     # reverse second array for "folding"
-    arr2 = arr2[:, ::1]
+    arr2 = arr2[:, ::-1]
     return arr1 + arr2
 
 
@@ -45,6 +45,26 @@ for direction, value in folds[:1]:
     else:
         arr = fold_left(arr, value)
 
+
 print(np.sum(np.where(arr > 0, 1, 0)))
 
-print(arr)
+#part 2
+arr = np.zeros((max([i[0] for i in coords])+1, max([i[1] for i in coords])+1))
+for pair in coords:
+    arr[pair[0], pair[1]] = 1
+arr = arr.T
+
+
+for direction, value in folds:
+    if direction == 'y':
+        arr = fold_up(arr, value)
+    else:
+        arr = fold_left(arr, value)
+    print(direction, value, np.sum(np.where(arr > 0, 1, 0)))
+
+if test:
+    print(arr)
+else:
+    arr = np.where(arr>0, '*', ' ')
+    for row in arr:
+        print(' '.join(row))
