@@ -8,8 +8,6 @@ pandas = "*"
 numpy = "*"
 networkx = "*"
 scipy = "*"
-matplotlib = "*"
-pyqt5 = "*"
 
 [dev-packages]
 

@@ -27,7 +27,6 @@ else:
     counts = defaultdict(int)
     for char in grown:
         counts[char] += 1
-    print(counts)
     print(max(counts.values()) - min(counts.values()))
 
 
