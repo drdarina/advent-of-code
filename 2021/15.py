@@ -8,6 +8,7 @@ with open(f'data/input15{"_test" if test else ""}.txt', 'r') as f:
 data = [list(i) for i in data]
 arr = np.array(data).astype(int)
 
+
 def get_graph(arr):
     g = nx.DiGraph()
     for i in range(arr.shape[0]):
@@ -26,6 +27,7 @@ def get_graph(arr):
                 g.add_edge((i,j-1), (i,j), weight=arr[i,j])
                 g.add_edge((i,j), (i,j-1), weight=arr[i,j-1])
     return g
+
 
 g = get_graph(arr)
 start = (0, 0)
