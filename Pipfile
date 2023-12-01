@@ -3,11 +3,17 @@ url = "https://pypi.python.org/simple"
 verify_ssl = true
 name = "pypi"
 
+[[source]]
+url = "https://${NEXUS_PYPI_USERNAME}:${NEXUS_PYPI_PASSWORD}@nexus-repository.bayes.gg/repository/bayes-pypi/simple"
+verify_ssl = true
+name = "bayes-pypi"
+
 [packages]
 pandas = "*"
 numpy = "*"
 networkx = "*"
 scipy = "*"
+predex-services = {editable = true, path = "./../../bayes/predex-services"}
 
 [dev-packages]
 
